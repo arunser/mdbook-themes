@@ -27,6 +27,7 @@
     {{/if}}
 
     <!-- Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ path_to_root }}FontAwesome/css/font-awesome.css">
     {{#if copy_fonts}}
     <link rel="stylesheet" href="{{ path_to_root }}fonts/fonts.css">
@@ -51,6 +52,77 @@
     <!-- MathJax -->
     <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     {{/if}}
+
+    <style>
+
+        
+        .button-container {
+            position: fixed; /* Fixed position for staying near the bottom-right corner */
+            bottom: 8%; /* Adjust distance from the bottom as a percentage */
+            right: 8%; /* Adjust distance from the right as a percentage */
+            width: 150px; /* Set the width of the container */
+            height: 150px; /* Set the height of the container */
+        }
+
+        .my-button {
+            border-radius: 50%; /* Round button */
+            font-size: 16px;
+            border: none;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            position: absolute;
+        }
+
+        .my-button:hover {
+            background-color: #008B8B;
+        }
+
+        /* Button 1 Styles */
+        #code_playground_button {
+            width: 50px; /* Fixed width for Button 1 */
+            height: 50px; /* Fixed height for Button 1 */
+            top: 50%;
+            left: 100%;
+            transform: translate(-50%, -50%);
+            font-size: 24px; /* Font size for the icon */
+        }
+
+        /* Button 2 Styles */
+        #py_button {
+            width: 60px; /* Fixed width for Button 2 */
+            height: 60px; /* Fixed height for Button 2 */
+            top: 0;
+            left: 0;
+            font-size: 24px; /* Font size for the icon */
+        }
+
+        /* Button 3 Styles */
+        #cplus_button {
+            width: 60px; /* Fixed width for Button 3 */
+            height: 60px; /* Fixed height for Button 3 */
+            bottom: 0;
+            left: 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .cplusplus-icon {
+            width: 3em; 
+            height: 3em;
+        }
+
+        .python-icon {
+            width: 1.5em; 
+            height: 1.5em;
+        }
+    </style>
 </head>
 <body>
     <!-- Provide site root to javascript -->
@@ -192,10 +264,7 @@
             {{/if}}
 
             <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-            <script type="text/javascript">
-                document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+            <script type="text/javascr<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">uerySelectorAll('#sidebar a')).forEach(function(link) {
                     link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                 });
             </script>
@@ -329,5 +398,38 @@
     {{/if}}
     {{/if}}
 
+
+    <div class="button-container">
+        <!-- Use Font Awesome icon for Button 1 -->
+        <button id="code_playground_button" class="my-button">
+            <i class="fas fa-code"></i> <!-- This icon corresponds to &#xf121; -->
+        </button>
+        <!-- Use Font Awesome Python icon for Button 2 -->
+        <button id="py_button" class="my-button hidden">
+            <img class="python-icon" src="https://raw.githubusercontent.com/hari-vickey/mdbook-assets/242a129d7f6853262e4eb7ed2fe72879a5968b7a/drone_assests/logos/python_logo.svg" alt="Python Icon">
+        </button>
+        <button id="cplus_button" class="my-button hidden">
+            <img class="cplusplus-icon" src="https://raw.githubusercontent.com/hari-vickey/mdbook-assets/242a129d7f6853262e4eb7ed2fe72879a5968b7a/drone_assests/logos/cpp_logo.svg" alt="C++ Icon">
+        </button>
+    </div>
+
+    <script>
+        document.getElementById('code_playground_button').addEventListener('click', function() {
+            var py_button = document.getElementById('py_button');
+            var cplus_button = document.getElementById('cplus_button');
+            
+            py_button.classList.toggle('hidden');
+            cplus_button.classList.toggle('hidden');
+        });
+
+        document.getElementById('py_button').addEventListener('click', function() {
+            window.open('https://www.w3schools.com/python/trypython.asp?filename=demo_default', '_blank'); // Open in new tab
+        });
+
+        document.getElementById('cplus_button').addEventListener('click', function() {
+            window.open('https://www.w3schools.com/CPP/trycpp.asp?filename=demo_helloworld', '_blank'); // Open in new tab
+        });
+    </script>
+    
 </body>
 </html>
